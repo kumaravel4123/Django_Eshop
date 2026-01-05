@@ -6,5 +6,4 @@ urlpatterns = [
     path('', views.homeView),
     path('about/', views.aboutView),
     path('contact/', views.contactView),
-    # path('base/', views.baseView)
 ]
