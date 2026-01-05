@@ -57,7 +57,9 @@ ROOT_URLCONF = 'Eshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +130,7 @@ STATICFILES_DIRS = [
 # For example, the ImageField datafields of any models will be stored in the
 # configured folder or server path here. The 'uploads_to' gives the sub_folder name to be created to store the data.
 # For development purpose, we are, for now, using a folder within the Django project folder (BASE_DIR) called `media` for emulating a media 
-# server. This folder will be created automatically when the ifrst record is added. The relative path of the media will be sotred in SQL 
+# server. This folder will be created automatically when the first record is added. The relative path of the media will be sotred in SQL 
 # as VARCHAR(). 
 
 MEDIA_ROOT = BASE_DIR/'media'
