@@ -7,13 +7,21 @@ Products
 {% block content %}
 
 
-    <div class="container-fluid w-100" id="card-container">
+    <!-- <div class="container-fluid w-100" id="card-container">
         <div class="products row row-cols-1 row-cols-md-2 g-4 m-2">
 
-            {% include 'products/includes/productCard.html' %}
+           
 
 
         </div>
-    </div>
+    </div> -->
+
+    <section class="mt-5 ">
+
+        <div class="pt-5">
+             {% include 'products/includes/productSection.html' %}
+        </div>
+
+    </section>
 
 {% endblock %}
