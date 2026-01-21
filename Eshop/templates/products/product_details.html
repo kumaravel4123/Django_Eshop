@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Product Details
+{% endblock %}
+
+{% block content %}
+
+<section class="d-flex row w-100">
+    <div class="col ">
+        <img src="{{product.thumbnail.url}}" alt="" height="500px" class="w-100 object-fit-contain" >
+    </div>
+
+    <div class="col">
+
+        <h2>{{product.title}}</h2>
+        <p>
+            {{product.desc}}
+        </p>
+        <p>
+            Rs. {{product.price}}
+        </p>
+        <div class="d-flex flex-row">
+
+            <a href="" class="btn btn-outline-primary">Add to Cart</a>
+            <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
