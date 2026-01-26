@@ -6,9 +6,59 @@ Product Details
 
 {% block content %}
 
+<section>
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            {% if product.images.all %}
+            {% for media in product.images.all %}
+            {% if media.img %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+                <img src="{{media.img.url}}" class="d-block w-100" alt="{{ media.caption }}">
+
+                <div class="carousel-actions">
+                    <button class="btn btn-light edit" >
+                        <i class="bi bi-pen"></i>
+                    </button>
+                    <button class="btn btn-light delete text-danger" >
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <div class="carousel-item active">
+                <img src="/media/defaults/no-image.png" class="d-block w-100" alt="">
+            </div>
+            {% endif %}
+
+            
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
 <section class="d-flex row w-100">
     <div class="col ">
-        <img src="{{product.thumbnail.url}}" alt="" height="500px" class="w-100 object-fit-contain" >
+        <img src="{{product.thumbnail.url}}" alt="" height="500px" class="w-100 object-fit-contain">
     </div>
 
     <div class="col">
@@ -25,7 +75,13 @@ Product Details
             <a href="" class="btn btn-outline-primary">Add to Cart</a>
             <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
+            <!-- <a href="{% url 'add_images' product.id %}" class="btn btn-outline_secondary">Add Media</a> -->
         </div>
+    </div>
+
+    <div>
+        {% csrf_token %}
+        {{form.as_p}}
     </div>
 </section>
 

@@ -46,9 +46,36 @@ class CreateProduct(CreateView):
     # redirection url for successful creation of resource
     success_url = '/'
 
-class ProductDetail(DetailView):
+class AddProductImage(CreateView):
+    model = Product
+    template_name = 'product/add_images.html'
+    fields = "__all__"
+
+    success_url = '/'
+
+from django.views.generic.edit import FormMixin
+# This mixin provides ability to render forms from the `form class`
+from .forms import ProductImageForm
+
+class ProductDetail(FormMixin,DetailView):
     model = Product
     template_name = 'products/product_details.html'
+    context_object_name = 'product'
+    # Providing form class for product image
+    form_class = ProductImageForm
+
+    # Overriding the queryset to pre-fetch and the product images along side products
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related('images')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['abcd'] = 'yuhoo'
+
+        return context
+    
+
 
 class UpdateProduct(UpdateView):
     model = Product
