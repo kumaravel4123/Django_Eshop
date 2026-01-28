@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from .models import Product
 
@@ -66,20 +67,27 @@ class ProductDetail(FormMixin,DetailView):
     model = Product
     template_name = 'products/product_details.html'
     context_object_name = 'product'
-    # Providing form class for product image
+    # Providing form class for product image    
     form_class = ProductImageForm
+
+    def get_success_url(self):
+        return reverse('product_details', kwargs={'pk' : self.object.pk})
+
 
     # Overriding the queryset to pre-fetch and the product images along side products
 
     def get_queryset(self):
         return Product.objects.prefetch_related('images')
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['abcd'] = 'yuhoo'
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
 
-        return context
-    
+        if form.is_valid():
+            image = form.save(commit = False)
+            image.product = self.object
+            image.save()
+            return redirect(self.get_success_url())
 
 
 class UpdateProduct(UpdateView):
@@ -92,4 +100,26 @@ class DeleteProduct(DeleteView):
     model = Product
     template_name = 'products/delete_product.html'
     success_url = '/'
+
+
+# Edit Product Image
+
+from .models import ProductImage
+
+class EditProductImage(UpdateView):
+    model = ProductImage
+    template_name = 'products/image_edit.html'
+    fields = '__all__'
+    context_object_name = 'image'
+
+    def get_success_url(self):
+        return reverse('product_details', kwargs={'pk' : self.object.product.pk})
+    
+class DeleteProductImage(DeleteView):
+    model = ProductImage
+    template_name = 'products/image_del.html'
+    context_object_name = 'image'
+
+    def get_success_url(self):
+        return reverse('product_details', kwargs={'pk' : self.object.product.pk})
 
