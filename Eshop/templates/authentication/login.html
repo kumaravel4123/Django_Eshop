@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="card mx-auto w-50 mt-3 p-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

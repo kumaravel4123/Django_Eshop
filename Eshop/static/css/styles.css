@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     padding-top: 80px;
     padding-bottom: 50px;
 }
@@ -12,17 +12,17 @@ body{
 
 /* Carousel Css */
 
-.carousels{
+.carousels {
     padding-top: 0px !important;
 }
 
-.carousel-inner{
-                img {
-                    height: 400px;
-                    width: 100%;
-                    object-fit: cover;
-                }
-            }
+.carousel-inner {
+    img {
+        height: 400px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 
 
 /* ProductCard Css */
@@ -52,4 +52,18 @@ body{
     transform: translateY(-4px);
     transition: 500ms;
     box-shadow: 3px 3px 3px rgb(188, 186, 186);
+}
+
+#product-carousel {
+
+    img {
+        height: 400px;
+        object-fit: contain;
+        width: 100%;
+    }
+
+}
+
+#productImageCarousel{
+    display: none;
 }

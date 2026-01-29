@@ -6,42 +6,44 @@ Product Details
 
 {% block content %}
 
-<section>
-    <div>
+<section class="d-flex" id="productImageCarousel">
+    <div class="w-50 bg-dark">
         {% include 'products/includes/productImageCarousel.html' %}
     </div>
-</section>
 
-<section class="d-flex row w-100">
-    <div class="col ">
-        <img src="{{product.thumbnail.url}}" alt="" height="500px" class="w-100 object-fit-contain">
-    </div>
 
-    <div class="col">
-
-        <h2>{{product.title}}</h2>
-        <p>
-            {{product.desc}}
-        </p>
-        <p>
-            Rs. {{product.price}}
-        </p>
-        <div class="d-flex flex-row">
-
-            <a href="" class="btn btn-outline-primary">Add to Cart</a>
-            <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
-            <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
-            <!-- <a href="{% url 'add_images' product.id %}" class="btn btn-outline_secondary">Add Media</a> -->
+    <section class="w-50">
+        <div class="col ">
+            <img src="{{product.thumbnail.url}}" alt="" height="500px" class="w-100 mt-3 object-fit-contain">
         </div>
-    </div>
 
-    <div>
-      <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success">add img</button>
-        </form>
-    </div>
+        <div class="col">
+
+            <h2>{{product.title}}</h2>
+            <p>
+                {{product.desc}}
+            </p>
+            <p>
+                Rs. {{product.price}}
+            </p>
+            <div class="d-flex flex-row justify-content-around">
+
+                <a href="" class="btn btn-outline-primary">Add to Cart</a>
+                <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning ">Edit</a>
+                <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
+                <!-- <a href="{% url 'add_images' product.id %}" class="btn btn-outline_secondary">Add Media</a> -->
+            </div>
+        </div>
+
+
+    </section>
 </section>
+<div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Add Image</button>
+    </form>
+</div>
 
 {% endblock %}
