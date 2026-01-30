@@ -6,12 +6,36 @@ Register
 {% block content %}
 
 <section>
-    <div class="card mx-auto w-50 mt-3 p-5">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-info">Register</button>
-        </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h3 class="text-center mb-4">
+                            Register Account
+                        </h3>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                            {% endif %}
+
+                            {% for field in form %}
+                                {% include 'base/includes/basic_form_field.html' %}
+                            {% endfor %}
+                            <button type="submit" class="btn btn-info w-100">Register</button>
+                            <p class="text-center mt-3 mb-0">
+                                Already have an account ? Sign in
+                                <a href="{% url 'signin' %}">Here</a>
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

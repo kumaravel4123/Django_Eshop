@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     # Apps
     'mainapp',
     'products',
-    'authentication'
+    'authentication',
+    'cart'
 ]
 
 MIDDLEWARE = [
