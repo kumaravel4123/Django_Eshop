@@ -32,8 +32,6 @@ class AddToCart(View):
         item.save()
         cart_count = CartItem.objects.filter(user = request.user).count()
 
-        cart_count = CartItem.objects.filter(user =  request.user).count()
-
         return JsonResponse({
             'message' : f'{this_product.title.capitalize()} was added to cart',
             'cart_count' : cart_count
