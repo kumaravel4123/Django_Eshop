@@ -7,7 +7,9 @@ from django.contrib.auth.models import User
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_items')
-    quantity = models.PositiveIntegerField()
+
+    quantity = models.PositiveIntegerField(default=0)
+
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

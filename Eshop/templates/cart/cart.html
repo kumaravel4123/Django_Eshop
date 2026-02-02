@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+    {% for item in cart_items %}
+    <div>
+        {{item}}
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

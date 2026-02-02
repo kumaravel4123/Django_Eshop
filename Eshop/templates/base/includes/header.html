@@ -35,6 +35,17 @@
 
                         </ul>
                     </li>
+                    
+                    
+                   <li class="nav-item me-3 position-relative">
+                        <a class="nav-link" href="{% url 'view_cart' %}"> Cart
+                            <i class="bi bi-cart-fill "></i> 
+                            {% if user.is_authenticated %}
+                            <span class="cart-badge" id="cart-count">0</span>
+                            {% endif %}
+                        </a>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -63,12 +74,6 @@
                             {% endif %}
                             
                         </ul>
-                    </li>
-                    
-                    <li class="nav-item">
-                       
-                        <a class="nav-link " aria-current="page"
-                            href="">  <i class="bi bi-cart-fill"></i> Cart</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
