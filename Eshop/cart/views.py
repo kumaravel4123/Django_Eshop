@@ -15,7 +15,7 @@ class AddToCart(View):
         if not request.user.is_authenticated:
             return JsonResponse({
                 'error' : 'login_required',
-                'redirect' : reverse('signin')
+                'redirect_url' : reverse('signin')
             },status = 401)
         
         # when the user is logged in

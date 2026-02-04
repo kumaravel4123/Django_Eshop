@@ -9,6 +9,9 @@ body {
     padding-bottom: 50px;
 }
 
+.nav-item {
+    width: fit-content;
+}
 
 /* Carousel Css */
 
@@ -65,7 +68,7 @@ body {
 }
 
 #productImageCarousel{
-    display: none;
+   
 }
 
 .cart-badge {

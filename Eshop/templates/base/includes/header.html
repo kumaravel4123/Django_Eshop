@@ -34,10 +34,17 @@
                             <li><a class="dropdown-item" href="#">Carousel</a></li>
 
                         </ul>
-                    </li>
-                    
-                    
-                   <li class="nav-item me-3 position-relative">
+                    </li>  
+                </ul>
+                <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
+                    <input name="q" value="{{query}}" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div>
+                
+                <ul class="navbar-nav ms-4">
+                    <li class="nav-item me-3 position-relative pe-3">
                         <a class="nav-link" href="{% url 'view_cart' %}"> Cart
                             <i class="bi bi-cart-fill "></i> 
                             {% if user.is_authenticated %}
@@ -45,7 +52,6 @@
                             {% endif %}
                         </a>
                     </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -76,11 +82,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
-                    <input name="q" value="{{query}}" class="form-control me-2" type="search" placeholder="Search"
-                        aria-label="Search" />
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                    
+                </div>
             </div>
         </div>
     </nav>

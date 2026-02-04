@@ -1,19 +1,33 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-Add Product
+Add Carousel Image
 {% endblock %}
 
 {% block content %}
 
-<section>
-    <div class="card mx-auto p-5 w-50 mt-3">
-        <form action="" method="post" enctype="multipart/form-data">
+<section class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <h5 class="mb-0">Upload Image</h5>
+        </div>
+
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success m-auto">Add Media</button>
-        </form>
+            {{ form.as_p }}
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-dark">
+                Upload
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 {% endblock %}

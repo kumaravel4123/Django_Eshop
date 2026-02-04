@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Forget Password
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5">
+    <h2>Send OTP to Registered Email</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="email">
+                Email Address
+            </label>
+            <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+        <button type="submit" class="btn btn-warning">Send OTP</button>
+    </form>
+</div>
+{% endblock %}

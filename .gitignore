@@ -15,4 +15,5 @@ migrations/
 *.log
 
 # environment files
+.env
 *.env
