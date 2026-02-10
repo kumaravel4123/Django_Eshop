@@ -1,11 +1,60 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
-{% block title %}
-About
-{% endblock %}
+{% block title %}About{% endblock %}
 
 {% block content %}
-This is about page...
-<br>
-Current Page : {{current_page}}
+<section class="fw-about">
+  <div class="fw-about-hero">
+    <div class="fw-about-hero-inner">
+      <span class="fw-label">About Solevyn</span>
+      <h1>Powering Your Digital Lifestyle</h1>
+      <p>
+        Solevyn is a premium electronic devices platform built to bring you the latest
+        technology with quality, reliability, and style. From smartphones to smart
+        accessories, we help you stay ahead in the digital world.
+      </p>
+    </div>
+  </div>
+
+  <div class="fw-about-wrap">
+
+    <div class="fw-about-grid">
+
+      <div class="fw-about-card">
+        <h3>Our Mission</h3>
+        <p>
+          To deliver high-quality electronic devices with premium service and trusted
+          support, making technology accessible and enjoyable for everyone.
+        </p>
+      </div>
+
+      <div class="fw-about-card">
+        <h3>What We Offer</h3>
+        <p>
+          Curated gadgets, latest smartphones, smart accessories, fast delivery, secure
+          payments, and customer-first support.
+        </p>
+      </div>
+
+      <div class="fw-about-card">
+        <h3>Why Choose Us</h3>
+        <p>
+          Premium product selection, quality assurance, seamless shopping experience,
+          transparent pricing, and dedicated support.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="fw-about-highlight">
+      <h2>Designed for the Future</h2>
+      <p>
+        We believe technology should not only be powerful but also beautifully designed.
+        Our platform is crafted with performance, security, and elegance in mind.
+      </p>
+    </div>
+
+  </div>
+</section>
 {% endblock %}

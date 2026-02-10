@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Order History{% endblock %}
+
+{% block content %}
+<section class="order-history">
+
+    <div class="shopmore">
+        <h2 class="order-history__title">Order History</h2>
+        <a href="{% url 'home_page' %}">Shop more</a>
+    </div>
+
+    {% for order in orders %}
+    <article class="order-card">
+
+        <header class="order-card__header">
+            <span>Order ID: #{{ order.id }}</span>
+            <span>{{ order.order_date|date:"d M Y, H:i" }}</span>
+        </header>
+
+        <div class="order-card__body">
+            <p>
+                <strong>Status:</strong>
+                <span class="order-status order-status--{{ order.status|lower }}">
+                    {{ order.status }}
+                </span>
+            </p>
+            <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+        </div>
+
+        <footer class="order-card__footer">
+
+            {% if order.status == "PENDING" %}
+            <a href="{% url 'payment:create_razorpay_order' order.id %}"
+               class="order-btn order-btn--primary">
+                Pay Now
+            </a>
+
+            <a href="{% url 'cancel_order' order.id %}"
+               class="order-btn order-btn--secondary">
+                Cancel Order
+            </a>
+            {% endif %}
+
+            <a href="{% url 'order_detail' order.id %}"
+               class="order-btn order-btn--secondary">
+                View Details
+            </a>
+
+            {% if order.status == "COMPLETED" %}
+            <a href="{% url 'order_invoice' order.id %}"
+               target="_blank"
+               class="order-btn order-btn--secondary">
+                Get Invoice
+            </a>
+            {% endif %}
+
+        </footer>
+
+    </article>
+    {% empty %}
+    <p>No orders found</p>
+    {% endfor %}
+
+</section>
+{% endblock %}

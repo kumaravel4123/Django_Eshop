@@ -9,16 +9,40 @@ BOOTSTRAP_ATTRS = {
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = [ 'title', 'desc', 'price', 'stock', 'thumbnail']
+        fields = ['title', 'desc', 'price', 'stock', 'thumbnail']
         widgets = {
-            'title' : forms.TextInput(attrs=BOOTSTRAP_ATTRS),
-            'desc' : forms.Textarea(attrs=BOOTSTRAP_ATTRS),
-            'price' : forms.NumberInput(attrs=BOOTSTRAP_ATTRS),
-            'stock' : forms.NumberInput(attrs=BOOTSTRAP_ATTRS),
-            'thumbnail' : forms.ClearableFileInput(attrs=BOOTSTRAP_ATTRS)
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Product title'
+            }),
+            'desc': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Product description',
+                'rows': 4
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Price'
+            }),
+            'stock': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Stock quantity'
+            }),
+            'thumbnail': forms.ClearableFileInput(attrs={
+                'class': 'form-control'
+            }),
         }
 
 class ProductImageForm(forms.ModelForm):
     class Meta:
         model = ProductImage
-        fields = ['img','caption']
+        fields = ['img', 'caption']
+        widgets = {
+            'img': forms.ClearableFileInput(attrs={
+                'class': 'form-control'
+            }),
+            'caption': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Optional caption'
+            }),
+        }

@@ -5,44 +5,53 @@ Product Details
 {% endblock %}
 
 {% block content %}
-
-<section class="d-flex" id="productImageCarousel">
-    <div class="w-50 mt-3">
+<section id="products-container" class="d-flex row productdetail product-card mb-5" data-product-id="{{product.id}}"
+    data-add-url="{% url 'add_to_cart' %}">
+    <div id="carouselExample" class="carousel slide col mt-3 pt-3 my-auto" data-bs-ride="carousel">
         {% include 'products/includes/productImageCarousel.html' %}
+        {% if user.is_staff %}
+        <section class="m-3 uploadimage">
+            <div class="upload">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                    {% include 'base/includes/basic_form_field.html' %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-info">Upload</button>
+                </form>
+            </div>
+        </section>
+        {% endif %}
     </div>
 
+    <div class="col details">
+        <img src="{{product.thumbnail.url}}" alt="" height="400px">
+        <h2>{{product.title}}</h2>
+        <p class="desc">{{product.desc}}</p>
+        <p class="rs"><span>Price:</span> &#8377; {{product.price}}</p>
+        <div class="btns">
+            {% if user.is_staff %}
+            <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning edit">Edit</a>
+            <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger delete">Delete</a>
+            {% else %}
 
-    <section class="w-50 ">
-        <div class="col">
-            <img src="{{product.thumbnail.url}}" alt="" height="300px" class="w-100 mt-3 object-fit-contain">
+            {% if product.stock > 0 %}
+            <button class="btn btn-success add add-to-cart">Add to Cart</button>
+            {% else %}
+
+            <button class="btn stock" aria-disabled="true">Out of Stock</button>
+            {% endif %}
+            {% endif %}
         </div>
-
-        <div class="col">
-
-            <h2>{{product.title}}</h2>
-            <p>
-                {{product.desc}}
-            </p>
-            <p>
-                Rs. {{product.price}}
-            </p>
-            <div class="d-flex flex-row justify-content-around mt-5">
-
-                <a href="" class="btn btn-primary w-25">Add to Cart</a>
-                <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning w-25">Edit</a>
-                <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger w-25">Delete</a> 
-                
-            </div>
-            <div class="d-flex justify-content-center m-auto mt-3">
-                <a href="" class="btn btn-secondary w-75">Add Media</a>
-                </div>
-        </div>
-
-
-    </section>
+    </div>
 </section>
-
-
-
-
 {% endblock %}
+{% block footer %}
+ {% include 'base/includes/footer.html' %}
+{% endblock %} 

@@ -1,8 +1,13 @@
+{% load static %}
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-warning fw-bold ms-4" href="{% url 'home_page' %}">
+                <img src="{% static 'images/project_logo.png' %}" height="70px" alt="AnimeXAnime Logo" class="nav-logo">
+            </a>
+
             <a class="navbar-brand" href="#">
-                <h1 class="ms-5">BuyZone</h1>
+                <h1 class="">BuyZone</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -23,7 +28,7 @@
                         <a class="nav-link {% if current_page == 'contact' %} active {% endif %}"
                             href="{% url 'contact_page' %}">Contact</a>
                     </li>
-
+                    {% if user.is_staff %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -31,58 +36,59 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'product_page' %}">Products</a></li>
-                            <li><a class="dropdown-item" href="#">Carousel</a></li>
+                            <li><a class="dropdown-item" href="{% url 'carousel_list' %}">Carousel</a></li>
 
                         </ul>
-                    </li>  
+                    </li>
+                    {% endif %}
                 </ul>
                 <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
-                    <input name="q" value="{{query}}" class="form-control me-2" type="search" placeholder="Search"
-                        aria-label="Search" />
+                    <input name="q" value="{{query}}" class="form-control me-2" type="search"
+                        placeholder="Search accessories for your career..." aria-label="Search" />
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div>
-                
-                <ul class="navbar-nav ms-4">
-                    <li class="nav-item me-3 position-relative pe-3">
-                        <a class="nav-link" href="{% url 'view_cart' %}"> Cart
-                            <i class="bi bi-cart-fill "></i> 
-                            {% if user.is_authenticated %}
-                            <span class="cart-badge" id="cart-count">0</span>
-                            {% endif %}
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="bi bi-person-circle me-1"></i>
-                            {% if user.is_authenticated %}
-                                {{user.username.capitalize}}
-                            {% else %}
-                                Hi User!
-                            {% endif %}
-                        </a>
 
-                        <ul class="dropdown-menu">
-                            {% if user.is_authenticated %}
+                    <ul class="navbar-nav ms-4">
+                        <li class="nav-item me-3 position-relative pe-3">
+                            <a class="nav-link" href="{% url 'view_cart' %}"> Cart
+                                <i class="bi bi-cart-fill "></i>
+                                {% if user.is_authenticated %}
+                                <span class="cart-badge" id="cart-count">0</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="bi bi-person-circle me-1 "></i>
+                                {% if user.is_authenticated %}
+                                {{user.username.capitalize}}
+                                {% else %}
+                                Hi User!
+                                {% endif %}
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                {% if user.is_authenticated %}
                                 <form action="{% url 'logout' %}" method="post">
                                     {% csrf_token %}
                                     <button class="dropdown-item text-danger">Logout</button>
                                 </form>
-                            {% else %}
+                                {% else %}
 
-                            <li class="dropdown-item">
-                                <a href="{% url 'signup' %}" class="dropdown-item">Register</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="{% url 'signin' %}" class="dropdown-item">Login</a>
-                            </li>
-                            {% endif %}
-                            
-                        </ul>
-                    </li>
-                </ul>
-                    
+                                <li class="dropdown-item">
+                                    <a href="{% url 'signup' %}" class="dropdown-item">Register</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="{% url 'signin' %}" class="dropdown-item">Login</a>
+                                </li>
+                                {% endif %}
+
+                            </ul>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>

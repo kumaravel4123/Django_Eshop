@@ -5,15 +5,25 @@ Add Product
 {% endblock %}
 
 {% block content %}
-
 <section>
-    <div class="card mx-auto p-5 w-50 mt-3">
-        <form action="" method="post" enctype="multipart/form-data">
+    <div class="addform">
+        <!-- Here we enctype for cutting big files into multiple parts -->
+        <h3>Enter the product Details</h3>
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success m-auto">Add Product</button>
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            {% for field in form %}
+            {% include 'base/includes/basic_form_field.html' %}
+            {% endfor %}
+            <div class="adbtn">
+                <button type="submit" class="addbtn">Add Product</button>
+            </div>
         </form>
     </div>
 </section>
-
 {% endblock %}

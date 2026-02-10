@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
 )
 
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 # applying same attributes for all form fields
 BOOTSTRAP_ATTRS = {
