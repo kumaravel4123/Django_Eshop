@@ -14,7 +14,7 @@
             {% if media.img %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}" id="product-carousel">
 
-                <img src="{{media.img.url}}" class="d-block w-100 "  alt="{{ media.caption }}">
+                <img src="{{media.img.url}}" class="d-block w-100" style="object-fit: contain;"  alt="{{ media.caption }}">
 
                 <div class="carousel-actions" 
                       style="margin-left: 400px;">
